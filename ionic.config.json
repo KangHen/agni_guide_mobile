@@ -1,0 +1,7 @@
+{
+  "name": "agni-guide",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
