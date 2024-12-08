@@ -1,6 +1,26 @@
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" color="light">
   <div id="mapbox-container"></div>
-  <div class="search-box">
-    <ion-searchbar placeholder="Cari Situs" class="searchbar" mode="md"></ion-searchbar>
-  </div>
+
+  <ion-grid class="position-fixed top-0 left-0 w-full">
+    <ion-row>
+      <ion-col size="12" class="flex ion-justify-content-end">
+        <div class="grid-mode">
+          <ion-icon name="grid-outline" color="medium" class="grid"></ion-icon>
+          <ion-toggle [enableOnOffLabels]="true" [checked]="gridMode()" mode="ios"
+            (ionChange)="toggleGridMode($event)"></ion-toggle>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-searchbar placeholder="Cari Situs" class="searchbar" mode="md"></ion-searchbar>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button mode="ios">
+      <ion-icon src="assets/icon/ui-radios-grid.svg"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

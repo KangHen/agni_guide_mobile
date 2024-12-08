@@ -38,6 +38,45 @@
 
 @import "./../node_modules/mapbox-gl/dist/mapbox-gl.css";
 
+ion-action-sheet.action-sheet {
+    border-radius: 15px 15px 0px 0px;
+    .action-sheet-group{
+        &.sc-ion-action-sheet-md{
+            &:first-child{
+                border-radius: 15px 15px 0px 0px;
+            }
+        }
+    }
+}
+
+.flex {
+    display: flex;
+}
+
+.position-fixed {
+    position: fixed;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.position-absolute {
+    position: absolute;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.top-0 {
+    top: 0;
+}
+
+.left-0 {
+    left: 0;
+}
+
 #mapbox-container {
     width: 100%;
     height: 100%;
