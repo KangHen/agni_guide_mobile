@@ -7,5 +7,17 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
+  <ion-grid>
+    <ion-row>
+      @for (item of items(); track $index) {
+      <ion-col size="6">
+        <app-news-card [news]="item" (clicked)="readNews($event)"></app-news-card>
+      </ion-col>
+      } @empty {
+      <ion-col size="12">
+        Tidak ada berita
+      </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
 </ion-content>
