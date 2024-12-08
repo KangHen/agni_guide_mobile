@@ -6,6 +6,8 @@ import mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment.local';
 import { NavController, ActionSheetController } from '@ionic/angular';
 import { timer } from 'rxjs';
+import { Preferences } from '@capacitor/preferences';
+import { EntanglementService } from '../services/entanglement.service';
 
 @Component({
   selector: 'app-tab1',
@@ -26,7 +28,8 @@ import { timer } from 'rxjs';
 })
 export class Tab1Page implements AfterViewInit {
   protected nav = inject(NavController);
-  actionSheetCtrl = inject(ActionSheetController);
+  public actionSheetCtrl = inject(ActionSheetController);
+  public entanglementService = inject(EntanglementService);
 
   map: null|mapboxgl.Map = null;
   mapLng = signal<number>(environment.mapbox.defaultLng)
@@ -38,6 +41,10 @@ export class Tab1Page implements AfterViewInit {
     addIcons({gridOutline,add});
 
     mapboxgl.accessToken = environment.mapbox.accessToken;
+  }
+
+  ionViewDidEnter() {
+    this.gridMode.set(false);
   }
 
   ngAfterViewInit(): void {
@@ -65,8 +72,12 @@ export class Tab1Page implements AfterViewInit {
           {
             text: 'Lanjutkan',
             handler: () => {
-              timer(500).subscribe(() => {
-                this.nav.navigateRoot('/historic-site')
+              this.entanglementService.$sendSignal.next('historic-site');
+
+              timer(500).subscribe(async () => {
+                await Preferences.set({ key: 'defaultTab', value: 'historic-site' });
+
+                this.nav.navigateRoot('/tabs/historic-site');
               })
             }
           },

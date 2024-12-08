@@ -106,9 +106,35 @@ ion-action-sheet.action-sheet {
     padding-right: 1rem;
 }
 
+.my-0 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.mx-0 {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
 .mx-1 {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+}
+
+.mt-3 {
+    margin-top: 1.5rem;
+}
+
+.mb-1 {
+    margin-bottom: 0.5rem;
+}
+
+.mb-2 {
+    margin-bottom: 1rem;
+}
+
+.mb-3 {
+    margin-bottom: 1.5rem;
 }
 
 ion-card{
