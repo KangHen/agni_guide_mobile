@@ -5,6 +5,7 @@ import { gridOutline, add } from 'ionicons/icons';
 import mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment.local';
 import { NavController, ActionSheetController } from '@ionic/angular';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-tab1',
@@ -63,7 +64,11 @@ export class Tab1Page implements AfterViewInit {
         buttons: [
           {
             text: 'Lanjutkan',
-            handler: () => this.nav.navigateRoot('/historic-site')
+            handler: () => {
+              timer(500).subscribe(() => {
+                this.nav.navigateRoot('/historic-site')
+              })
+            }
           },
           {
             text: 'Batalkan',

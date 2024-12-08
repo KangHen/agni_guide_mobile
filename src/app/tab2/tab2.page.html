@@ -10,12 +10,12 @@
   <ion-grid>
     <ion-row>
       @for (item of items(); track $index) {
-      <ion-col size="6">
+      <ion-col size="12">
         <app-news-card [news]="item" (clicked)="readNews($event)"></app-news-card>
       </ion-col>
       } @empty {
       <ion-col size="12">
-        Tidak ada berita
+        <app-not-found></app-not-found>
       </ion-col>
       }
     </ion-row>
