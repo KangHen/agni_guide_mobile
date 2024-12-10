@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonCol, IonButton, IonInput, IonGrid, IonRow, IonIcon, IonCheckbox, IonTitle, IonToolbar, IonModal, IonButtons, IonHeader } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { closeOutline, eye, lockClosed, mail } from 'ionicons/icons';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,9 @@ import { closeOutline, eye, lockClosed, mail } from 'ionicons/icons';
 })
 export class LoginPage implements OnInit {
   @ViewChild(IonModal) termsModal!: IonModal;
+
+  protected nav = inject(NavController);
+
   constructor() {
     addIcons({mail,lockClosed,eye, closeOutline});
   }
@@ -22,4 +26,7 @@ export class LoginPage implements OnInit {
   
   }
 
+  register(): void {
+    this.nav.navigateForward(['register']);
+  }
 }

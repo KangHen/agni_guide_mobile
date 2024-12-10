@@ -1,13 +1,73 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border" mode="md">
   <ion-toolbar>
     <ion-title>Register</ion-title>
+    <ion-buttons slot="start">
+      <ion-button slot="icon-only" (click)="back()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Register</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <div class="logo">
+          <img src="assets/logo.png" alt="" />
+        </div>
+      </ion-col>
+      <ion-col size="12">
+        <ion-input label="Email" label-placement="stacked" fill="outline" placeholder="Enter text"></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-input label="Nama" label-placement="stacked" fill="outline" placeholder="Enter text"></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-input label="No Telpon" label-placement="stacked" fill="outline" placeholder="Enter text"></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-input label="Alamat" label-placement="stacked" fill="outline" placeholder="Enter text"></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-input label="Kota" label-placement="stacked" fill="outline" placeholder="Enter text"></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-input label="Password" label-placement="stacked" fill="outline" placeholder="Enter text"></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-input label="Konfirm Password" label-placement="stacked" fill="outline"
+          placeholder="Enter text"></ion-input>
+      </ion-col>
+      <ion-col size="12">
+        <ion-checkbox mode="ios"></ion-checkbox>
+        <ion-label class="ion-text-wrap">
+          Saya setuju dengan <a id="terms-modal" (click)="$event.stopPropagation()">syarat
+            dan
+            ketentuan</a>
+        </ion-label>
+      </ion-col>
+      <ion-col size="12">
+        <ion-button mode="ios" expand="block">Register</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-modal trigger="terms-modal">
+    <ng-template>
+      <ion-header class="ion-no-border" mode="md">
+        <ion-toolbar>
+          <ion-title>Syarat dan Ketentuan</ion-title>
+          <ion-buttons slot="end">
+            <ion-button [strong]="true" (click)="termsModal.dismiss()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding" color="light">
+
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
