@@ -1,0 +1,24 @@
+.logo {
+    width: 200px;
+    margin: auto;
+}
+
+.auth {
+    display: flex;
+    height: 90vh;
+    align-items: center;
+
+    h1 {
+        font-weight: 700;
+        background: linear-gradient(to right, #ef4744, #F56B41);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 2rem; /* Example size */
+    }
+
+    ion-checkbox {
+        font-size: .8rem;
+        font-weight: bold;
+        font-style: italic;
+    }
+}
