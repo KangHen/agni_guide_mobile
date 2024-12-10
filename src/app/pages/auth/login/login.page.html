@@ -23,7 +23,7 @@
         </ion-input>
       </ion-col>
       <ion-col size="12">
-        <ion-checkbox mode="ios" labelPlacement="end">Saya setuju dengan <a id="terms-modal"
+        <ion-checkbox mode="ios" labelPlacement="end">Saya setuju dengan <a id="terms-modal-login"
             (click)="$event.stopPropagation()">syarat
             dan
             ketentuan</a></ion-checkbox>
@@ -44,13 +44,13 @@
     </ion-row>
   </ion-grid>
 
-  <ion-modal trigger="terms-modal">
+  <ion-modal trigger="terms-modal-login">
     <ng-template>
       <ion-header class="ion-no-border" mode="md">
         <ion-toolbar>
           <ion-title>Syarat dan Ketentuan</ion-title>
           <ion-buttons slot="end">
-            <ion-button [strong]="true" (click)="termsModal.dismiss()">
+            <ion-button [strong]="true" (click)="termsModalLogin.dismiss()">
               <ion-icon name="close-outline"></ion-icon>
             </ion-button>
           </ion-buttons>

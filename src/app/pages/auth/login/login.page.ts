@@ -14,7 +14,7 @@ import { NavController } from '@ionic/angular';
   imports: [IonHeader, IonButtons,  IonModal, IonToolbar, IonTitle, IonInput, IonButton, IonCol, IonContent, IonGrid, IonRow, IonIcon, IonCheckbox, CommonModule, FormsModule]
 })
 export class LoginPage implements OnInit {
-  @ViewChild(IonModal) termsModal!: IonModal;
+  @ViewChild(IonModal) termsModalLogin!: IonModal;
 
   protected nav = inject(NavController);
 

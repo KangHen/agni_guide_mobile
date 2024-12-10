@@ -31,7 +31,7 @@ import { NavController } from '@ionic/angular';
   ]
 })
 export class RegisterPage implements OnInit {
-  @ViewChild(IonModal) termsModal!: IonModal;
+  @ViewChild(IonModal) termsModalRegister!: IonModal;
   protected nav = inject(NavController);
   constructor() {
     addIcons({arrowBackOutline,closeOutline,mail});
