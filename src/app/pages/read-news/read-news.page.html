@@ -1,9 +1,20 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>ReadNews</ion-title>
+    <ion-buttons slot="start">
+      <ion-button slot="icon-only" (click)="back()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
+  @if (news()) {
+  <ion-img [src]="news()?.image"></ion-img>
+  <div [innerHTML]="news()?.content"></div>
+  }
 
+  @if (!news()) {
+  <app-not-found></app-not-found>
+  }
 </ion-content>
