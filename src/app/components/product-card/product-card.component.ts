@@ -1,4 +1,4 @@
-import { Component, input, OnInit } from '@angular/core';
+import { Component, input, OnInit, output } from '@angular/core';
 import { IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonCardSubtitle, IonButton, IonIcon } from "@ionic/angular/standalone";
 import { addIcons } from 'ionicons';
 import { baseballOutline, basketOutline } from 'ionicons/icons';
@@ -13,6 +13,7 @@ import { Product } from 'src/app/pages/product-buy/product.type';
 })
 export class ProductCardComponent  implements OnInit {
   product = input<Product>();
+  clicked = output<number>();
 
   constructor() {
     addIcons({basketOutline,baseballOutline});
@@ -20,4 +21,7 @@ export class ProductCardComponent  implements OnInit {
 
   ngOnInit() {}
 
+  detail(): void {
+    this.clicked.emit(1);
+  }
 }

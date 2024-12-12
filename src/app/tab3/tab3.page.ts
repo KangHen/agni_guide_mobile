@@ -4,6 +4,8 @@ import { Product } from '../pages/product-buy/product.type';
 import { ProductCardComponent } from '../components/product-card/product-card.component';
 import { IonGrid, IonRow, IonCol } from '@ionic/angular/standalone';
 import { NotFoundComponent } from '../shared/not-found/not-found.component';
+import { inject } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -23,6 +25,8 @@ import { NotFoundComponent } from '../shared/not-found/not-found.component';
   ],
 })
 export class Tab3Page implements OnInit {
+  protected nav = inject(NavController)
+
   products = signal<Product[]>([]);
 
   constructor() {}
@@ -51,5 +55,9 @@ export class Tab3Page implements OnInit {
         image: 'https://via.placeholder.com/150',
       },
     ]);
+  }
+
+  detail(event: number) {
+    this.nav.navigateForward('/product-buy/' + event);
   }
 }
