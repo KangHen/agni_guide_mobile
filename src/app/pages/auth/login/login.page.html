@@ -1,50 +1,54 @@
 <ion-content [fullscreen]="true">
-  <ion-grid class="auth ion-padding">
-    <ion-row>
-      <ion-col size="12">
-        <div class="logo">
-          <img src="assets/logo.png" alt="" />
-        </div>
-      </ion-col>
-      <ion-col size="12">
-        <h1>Login</h1>
-      </ion-col>
-      <ion-col size="12">
-        <ion-input fill="outline" labelPlacement="stacked" label="Email" placeholder="email@domain.com">
-          <ion-icon slot="start" name="mail" aria-hidden="true"></ion-icon>
-        </ion-input>
-      </ion-col>
-      <ion-col size="12">
-        <ion-input fill="outline" labelPlacement="stacked" label="Password" placeholder="password">
-          <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
-          <ion-button fill="clear" slot="end" aria-label="Show/hide">
-            <ion-icon slot="icon-only" name="eye" aria-hidden="true"></ion-icon>
+  <form [formGroup]="form" novalidate>
+    <ion-grid class="auth ion-padding">
+      <ion-row>
+        <ion-col size="12">
+          <div class="logo">
+            <img src="assets/logo.png" alt="" />
+          </div>
+        </ion-col>
+        <ion-col size="12">
+          <h1>Login</h1>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input type="email" formControlName="email" fill="outline" labelPlacement="stacked" label="Email"
+            placeholder="email@domain.com">
+            <ion-icon slot="start" name="mail" aria-hidden="true"></ion-icon>
+          </ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-input [type]="showPassword() ? 'text' : 'password'" fill="outline" formControlName="password"
+            labelPlacement="stacked" label="Password" placeholder="password">
+            <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+            <ion-button (click)="togglePassword()" fill="clear" slot="end" aria-label="Show/hide">
+              <ion-icon slot="icon-only" name="eye" aria-hidden="true"></ion-icon>
+            </ion-button>
+          </ion-input>
+        </ion-col>
+        <ion-col size="12">
+          <ion-checkbox formControlName="terms" mode="ios" labelPlacement="end">Saya setuju dengan <a
+              id="terms-modal-login" (click)="$event.stopPropagation()">syarat
+              dan
+              ketentuan</a></ion-checkbox>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button mode="ios" expand="block" (click)="login()">Masuk</ion-button>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button mode="ios" expand="block" color="light">
+            <ion-icon src="assets/icon/google.svg"></ion-icon>
           </ion-button>
-        </ion-input>
-      </ion-col>
-      <ion-col size="12">
-        <ion-checkbox mode="ios" labelPlacement="end">Saya setuju dengan <a id="terms-modal-login"
-            (click)="$event.stopPropagation()">syarat
-            dan
-            ketentuan</a></ion-checkbox>
-      </ion-col>
-      <ion-col size="12">
-        <ion-button mode="ios" expand="block">Masuk</ion-button>
-      </ion-col>
-      <ion-col size="12">
-        <ion-button mode="ios" expand="block" color="light">
-          <ion-icon src="assets/icon/google.svg"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col size="12">
-        <ion-button (click)="register()" mode="ios" expand="block" fill="outline" color="medium">
-          Register
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+        </ion-col>
+        <ion-col size="12">
+          <ion-button (click)="register()" mode="ios" expand="block" fill="outline" color="medium">
+            Register
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 
-  <ion-modal trigger="terms-modal-login">
+  <ion-modal trigger="terms-modal-login" [initialBreakpoint]="0.9">
     <ng-template>
       <ion-header class="ion-no-border" mode="md">
         <ion-toolbar>
@@ -56,8 +60,8 @@
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-      <ion-content class="ion-padding" color="light">
-
+      <ion-content class="ion-padding">
+        <p [innerHTML]="privacyPolicy()?.content"></p>
       </ion-content>
     </ng-template>
   </ion-modal>

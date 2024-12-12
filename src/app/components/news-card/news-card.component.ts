@@ -25,4 +25,7 @@ export class NewsCardComponent  implements OnInit {
 
   ngOnInit() {}
 
+  detail(): void {
+    this.clicked.emit(1);
+  }
 }

@@ -157,8 +157,23 @@ ion-card{
     }
 }
 
+ion-modal {
+  --border-radius: 16px 16px 0px 0px;
+  --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
 #mapbox-container {
     width: 100%;
     height: 100%;
     position: relative;
+}
+
+.alerting {
+    --background: #fff;
+
+    .alert-button-group {
+        button {
+            border: none !important;
+        }
+    }
 }

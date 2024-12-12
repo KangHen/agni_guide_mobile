@@ -1,20 +1,26 @@
-<ion-header [translucent]="true" class="ion-no-border">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button slot="icon-only" (click)="back()">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true">
   @if (news()) {
   <ion-img [src]="news()?.image"></ion-img>
-  <div [innerHTML]="news()?.content"></div>
+
+  <ion-card mode="ios">
+    <ion-card-header>
+      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+      <ion-card-title>Card Title</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div [innerHTML]="news()?.content"></div>
+    </ion-card-content>
+  </ion-card>
   }
 
   @if (!news()) {
   <app-not-found></app-not-found>
   }
+
+  <ion-fab slot="fixed" vertical="top" horizontal="start">
+    <ion-fab-button fill="clear" size="small" class="ion-no-border" (click)="back()">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

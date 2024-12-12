@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { IonContent, IonHeader, IonToolbar, IonButtons, IonButton, IonIcon, IonImg } from '@ionic/angular/standalone';
+import { IonContent, IonFab, IonFabButton, IonIcon, IonImg, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/angular/standalone';
 import { News } from './news.type';
 import { ActivatedRoute } from '@angular/router';
 import { addIcons } from 'ionicons';
@@ -13,13 +13,17 @@ import { NewsService } from './news.service';
   templateUrl: './read-news.page.html',
   styleUrls: ['./read-news.page.scss'],
   standalone: true,
-  imports: [IonImg, 
-    IonContent, 
-    IonHeader, 
-    IonToolbar,
-    IonButtons,
-    IonButton,
+  imports: [
+    IonImg, 
+    IonContent,
     IonIcon,
+    IonFab,
+    IonFabButton,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardSubtitle,
+    IonCardContent,
     NotFoundComponent
   ]
 })
@@ -43,6 +47,18 @@ export class ReadNewsPage implements OnInit {
     if (this.id() < 1) {
       this.back();
     }
+
+    const data: News = {
+      id: 1,
+      content: '',
+      image: 'https://ionicframework.com/docs/img/demos/card-media.png',
+      read_count: 1,
+      title: '',
+      created_at: '',
+      updated_at: '',
+      user_id: 1
+    }
+    this.news.set(data);
   }
 
   async getNews(): Promise<void> {

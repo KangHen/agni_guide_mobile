@@ -18,9 +18,23 @@
     </ion-row>
   </ion-grid>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" id="category-modal">
     <ion-fab-button mode="ios">
       <ion-icon src="assets/icon/ui-radios-grid.svg"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  <ion-modal trigger="category-modal" mode="nd" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.75]"
+    (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header class="ion-no-border">
+        <ion-toolbar>
+          <ion-title>Kategori</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

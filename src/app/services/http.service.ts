@@ -18,13 +18,18 @@ export class HttpService {
     const response = await CapacitorHttp.get({
       url: `${this.API}/${path}`,
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
         'authorization': `Bearer ${Bearer}`
       },
       params
     });
 
-    return response.data;
+    if (response.status === 200) {
+      return response.data;
+    }
+
+    throw new Error(response.data.message);
   }
 
   async post<T>(path: string, data?: any, params?: any): Promise<T> {
@@ -33,6 +38,7 @@ export class HttpService {
     const response = await CapacitorHttp.post({
       url: `${this.API}/${path}`,
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
         'authorization': `Bearer ${Bearer}`
       },
@@ -40,7 +46,11 @@ export class HttpService {
       params
     });
 
-    return response.data;
+    if (response.status === 200) {
+      return response.data;
+    }
+
+    throw new Error(response.data.message);
   }
 
   async put<T>(path: string, data?: any, params?: any): Promise<T> {
@@ -49,6 +59,7 @@ export class HttpService {
     const response = await CapacitorHttp.put({
       url: `${this.API}/${path}`,
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
         'authorization': `Bearer ${Bearer}`
       },
@@ -56,7 +67,11 @@ export class HttpService {
       params
     });
 
-    return response.data;
+    if (response.status === 200) {
+      return response.data;
+    }
+
+    throw new Error(response.data.message);
   }
 
   async delete<T>(path: string, params?: any): Promise<T> {
@@ -65,12 +80,17 @@ export class HttpService {
     const response = await CapacitorHttp.delete({
       url: `${this.API}/${path}`,
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
         'authorization': `Bearer ${Bearer}`
       },
       params
     });
 
-    return response.data;
+    if (response.status === 200) {
+      return response.data;
+    }
+
+    throw new Error(response.data.message);
   }
 }

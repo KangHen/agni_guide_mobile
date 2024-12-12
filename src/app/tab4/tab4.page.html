@@ -45,13 +45,13 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button mode="ios" expand="block" size="small">
+        <ion-button mode="ios" expand="block" size="small" id="change-user-modal">
           <ion-icon slot="start" name="person-outline"></ion-icon>
           Ubah Profil
         </ion-button>
       </ion-col>
       <ion-col>
-        <ion-button mode="ios" expand="block" color="secondary" size="small">
+        <ion-button mode="ios" expand="block" color="secondary" size="small" id="change-password-modal">
           <ion-icon slot="start" name="key-outline"></ion-icon>
           Ubah Password
         </ion-button>
@@ -59,7 +59,7 @@
     </ion-row>
     <ion-row>
       <ion-col size="12">
-        <ion-button mode="ios" expand="block" color="light">
+        <ion-button mode="ios" expand="block" color="light" (click)="logout()">
           <ion-icon slot="start" name="exit-outline"></ion-icon>
           Logout
         </ion-button>
@@ -67,5 +67,29 @@
     </ion-row>
   </ion-grid>
 
+  <ion-modal mode="md" trigger="change-password-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+    <ng-template>
+      <ion-header class="ion-no-border">
+        <ion-toolbar>
+          <ion-title>Ubah Password</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <div class="change-password-content">
+        <app-change-password></app-change-password>
+      </div>
+    </ng-template>
+  </ion-modal>
 
+  <ion-modal mode="md" trigger="change-user-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+    <ng-template>
+      <ion-header class="ion-no-border">
+        <ion-toolbar>
+          <ion-title>Ubah Profil</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <div class="change-user-content">
+        <app-change-user-profile></app-change-user-profile>
+      </div>
+    </ng-template>
+  </ion-modal>
 </ion-content>

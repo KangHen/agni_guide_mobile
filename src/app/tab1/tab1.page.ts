@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, inject, signal } from '@angular/core';
-import { IonContent, IonSearchbar, IonToggle, IonGrid, IonRow, IonCol, IonIcon, IonFab, IonFabButton } from '@ionic/angular/standalone';
+import { IonContent, IonSearchbar, IonToggle, IonGrid, IonRow, IonCol, IonIcon, IonFab, IonFabButton, IonModal, IonToolbar, IonHeader, IonButtons, IonButton, IonTitle, IonInput, IonItem } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { gridOutline, add } from 'ionicons/icons';
 import mapboxgl from 'mapbox-gl';
@@ -14,7 +14,10 @@ import { EntanglementService } from '../services/entanglement.service';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   standalone: true,
-  imports: [
+  imports: [IonItem, IonInput, IonTitle, IonButton, IonButtons, 
+    IonToolbar, 
+    IonModal, 
+    IonHeader,
     IonGrid, 
     IonRow, 
     IonCol, 
@@ -91,5 +94,9 @@ export class Tab1Page implements AfterViewInit {
 
       actionSheet.present();
     }
+  }
+
+  onWillDismiss(ev: any) {
+    
   }
 }

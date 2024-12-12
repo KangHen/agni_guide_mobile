@@ -19,3 +19,14 @@ export type User = {
     created_at: string;
     updated_at: string;
 }
+
+export type UserForm = {
+    email: string;
+    name: string;
+    phone: string;
+    address: string;
+    city: string;
+    password: string;
+    confirm_password: string;
+    terms: boolean;
+}
