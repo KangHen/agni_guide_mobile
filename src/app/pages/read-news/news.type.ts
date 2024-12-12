@@ -6,6 +6,7 @@ export type News = {
     title: string;
     content: string;
     image: string;
+    slug: string;
     read_count: number;
     user_id: number;
     created_at: string;
@@ -23,4 +24,8 @@ export type NewsForm = {
 
 export type NewsResponse = BasicResponse & {
     data: News|News[]
+}
+
+export type NewsParams = {
+    page: number;
 }

@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
-import { News, NewsResponse } from './news.type';
+import { News, NewsParams, NewsResponse } from './news.type';
 
 @Injectable({
   providedIn: 'root'
@@ -10,23 +10,11 @@ export class NewsService {
 
   constructor() { }
 
-  all(): Promise<NewsResponse> {
-    return this.httpService.get<NewsResponse>('news');
+  all(params: NewsParams = { page: 1 }): Promise<NewsResponse> {
+    return this.httpService.get<NewsResponse>('posts', params);
   }
 
-  show(id: number): Promise<NewsResponse> {
-    return this.httpService.get<NewsResponse>(`news/${id}`);
-  }
-
-  save(data: any, id: number = 0): Promise<News> {
-    if (id > 0) {
-      return this.httpService.put<News>(`news/${id}`, data);
-    } else {
-      return this.httpService.post<News>('news', data);
-    }
-  }
-
-  delete(id: number): Promise<News> {
-    return this.httpService.delete<News>(`news/${id}`);
+  show(slug: string): Promise<NewsResponse> {
+    return this.httpService.get<NewsResponse>(`posts/${slug}`);
   }
 }

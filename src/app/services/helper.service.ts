@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { LoadingController, ToastController } from '@ionic/angular';
+import { environment } from 'src/environments/environment.local';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,8 @@ import { LoadingController, ToastController } from '@ionic/angular';
 export class HelperService {
   protected loadingController = inject(LoadingController)
   protected toastController = inject(ToastController)
+
+  storage: string = environment.api.storage;
 
   constructor() { }
 
@@ -42,5 +45,14 @@ export class HelperService {
     });
 
     return toast.present();
+  }
+
+  getSmallImage(image: string): string {
+    const smallImage: string = image.replace('posts/', 'posts/sm-');
+    return `${this.storage}/${smallImage}`;
+  }
+
+  getImage(image: string): string {
+    return `${this.storage}/${image}`;
   }
 }
