@@ -9,10 +9,10 @@
     </ion-row>
     <ion-row>
       <ion-col class="header flex ion-justify-content-center" size="12">
-        <ion-title>Agni Guide</ion-title>
+        <ion-title>{{ user()?.name }}</ion-title>
       </ion-col>
       <ion-col size="12" class="flex ion-justify-content-center">
-        <ion-chip color="primary">agni_agniguide.com</ion-chip>
+        <ion-chip color="primary">{{ user()?.email }}</ion-chip>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -20,25 +20,25 @@
   <ion-item>
     <ion-label>
       <h3>Nama</h3>
-      <p>Paragraph</p>
+      <p>{{ user()?.name }}</p>
     </ion-label>
   </ion-item>
   <ion-item>
     <ion-label>
-      <h3>Phone</h3>
-      <p>Paragraph</p>
+      <h3>No Telpon</h3>
+      <p>{{ user()?.phone }}</p>
     </ion-label>
   </ion-item>
   <ion-item>
     <ion-label>
       <h3>Alamat</h3>
-      <p>Paragraph</p>
+      <p>{{ user()?.address }}</p>
     </ion-label>
   </ion-item>
   <ion-item>
     <ion-label>
       <h3>Kota</h3>
-      <p>Paragraph</p>
+      <p>{{ user()?.city }}</p>
     </ion-label>
   </ion-item>
 
@@ -88,7 +88,7 @@
         </ion-toolbar>
       </ion-header>
       <div class="change-user-content">
-        <app-change-user-profile></app-change-user-profile>
+        <app-change-user-profile [user]="user()" (clicked)="onSubmit($event)"></app-change-user-profile>
       </div>
     </ng-template>
   </ion-modal>

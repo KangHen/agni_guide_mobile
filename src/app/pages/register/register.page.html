@@ -39,12 +39,22 @@
             placeholder="Kota"></ion-input>
         </ion-col>
         <ion-col size="12">
-          <ion-input formControlName="password" label="Password" label-placement="stacked" fill="outline"
-            placeholder="Password"></ion-input>
+          <ion-input [type]="showPassword1() ? 'text' : 'password'" fill="outline" formControlName="password"
+            labelPlacement="stacked" label="Password" placeholder="password">
+            <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+            <ion-button (click)="togglePassword1()" fill="clear" slot="end" aria-label="Show/hide">
+              <ion-icon slot="icon-only" name="eye" aria-hidden="true"></ion-icon>
+            </ion-button>
+          </ion-input>
         </ion-col>
         <ion-col size="12">
-          <ion-input formControlName="confirm_password" label="Konfirm Password" label-placement="stacked"
-            fill="outline" placeholder="Konfirm Password"></ion-input>
+          <ion-input [type]="showPassword2() ? 'text' : 'password'" fill="outline" formControlName="confirm_password"
+            labelPlacement="stacked" label="Password" placeholder="password">
+            <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
+            <ion-button (click)="togglePassword2()" fill="clear" slot="end" aria-label="Show/hide">
+              <ion-icon slot="icon-only" name="eye" aria-hidden="true"></ion-icon>
+            </ion-button>
+          </ion-input>
         </ion-col>
         <ion-col size="12">
           <ion-checkbox formControlName="terms" mode="ios"></ion-checkbox>

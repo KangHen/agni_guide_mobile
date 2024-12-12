@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, IonButton, IonButtons, IonCol, IonGrid, IonRow, IonInput, IonCheckbox, IonLabel, IonModal } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { arrowBackOutline, mail, closeOutline } from 'ionicons/icons';
+import { arrowBackOutline, mail, closeOutline, lockClosed, eye } from 'ionicons/icons';
 import { NavController } from '@ionic/angular';
 import { Preferences } from '@capacitor/preferences';
 import { Terms } from '../auth/auth.type';
 import { HelperService } from 'src/app/services/helper.service';
-import { AuthService } from '../auth/auth.service';
+import { RegisterService } from './register.service';
 
 
 @Component({
@@ -40,14 +40,16 @@ export class RegisterPage implements OnInit {
   protected nav = inject(NavController);
 
   helperService = inject(HelperService);
-  authService = inject(AuthService);
+  registerService = inject(RegisterService);
 
   form!: FormGroup;
 
   privacyPolicy = signal<Terms|null>(null);
+  showPassword1 = signal<boolean>(false);
+  showPassword2 = signal<boolean>(false);
 
   constructor() {
-    addIcons({arrowBackOutline,closeOutline,mail});
+    addIcons({arrowBackOutline,lockClosed,eye,closeOutline,mail});
   }
 
   ngOnInit() {
@@ -83,7 +85,7 @@ export class RegisterPage implements OnInit {
     const loading = await this.helperService.presentLoading();
 
     try {
-      const { data, token } = await this.authService.register(this.form.value);
+      const { data, token } = await this.registerService.register(this.form.value);
       loading.dismiss();
 
       await Preferences.set({ key: 'token', value: token });
@@ -95,6 +97,14 @@ export class RegisterPage implements OnInit {
 
       this.helperService.presentError(error?.message);
     }
+  }
+
+  togglePassword1(): void {
+    this.showPassword1.set(!this.showPassword1());
+  }
+
+  togglePassword2(): void {
+    this.showPassword2.set(!this.showPassword2());
   }
 
   back(): void {

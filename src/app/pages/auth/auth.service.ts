@@ -45,30 +45,13 @@ export class AuthService {
     this.nav.navigateRoot('/login');
   }
 
-  async terms(): Promise<TermsRepsonse> {
+  async terms<T>(): Promise<TermsRepsonse> {
     const response = await CapacitorHttp.get({
       url: `${this.API}/terms`,
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       }
-    });
-
-    if (response.status === 200) {
-      return response.data;
-    }
-
-    throw new Error(response.data.message);
-  }
-
-  async register<T>(data: UserForm): Promise<AuthResponse> {
-    const response = await CapacitorHttp.post({
-      url: `${this.API}/register`,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      data
     });
 
     if (response.status === 200) {

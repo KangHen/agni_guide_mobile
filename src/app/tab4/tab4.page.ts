@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonGrid, IonCol, IonRow, IonContent, IonImg, IonText, IonTitle, IonChip, IonItem,IonLabel, IonButton, IonIcon, IonModal, IonToolbar, IonHeader } from '@ionic/angular/standalone';
@@ -8,6 +8,8 @@ import { ChangePasswordComponent } from '../components/user/change-password/chan
 import { ChangeUserProfileComponent } from '../components/user/change-user-profile/change-user-profile.component';
 import { AlertController, NavController } from '@ionic/angular';
 import { AuthService } from '../pages/auth/auth.service';
+import { UserService } from '../services/user.service';
+import { User } from '../pages/auth/user.type';
 
 @Component({
   selector: 'app-tab4',
@@ -34,12 +36,32 @@ export class Tab4Page implements OnInit {
   protected alertController = inject(AlertController);
 
   authService = inject(AuthService);
+  userService = inject(UserService);
+
+  user = signal<User|null>(null);
 
   constructor() {
-    addIcons({personOutline,keyOutline,exitOutline});
+    addIcons({
+      personOutline,
+      keyOutline,
+      exitOutline
+    });
   }
 
   ngOnInit() {
+    this.getUser();
+  }
+
+  async getUser(): Promise<void> {
+    const user = await this.userService.getUser();
+
+    if (user) {
+      this.user.set(user as User);
+    }
+  }
+
+  async onSubmit(ev: any): Promise<void> {
+    console.log(ev)
   }
 
   async logout() {
