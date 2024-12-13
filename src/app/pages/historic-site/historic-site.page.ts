@@ -32,8 +32,9 @@ import { EntanglementService } from 'src/app/services/entanglement.service';
 })
 export class HistoricSitePage implements OnInit {
   protected nav = inject(NavController);
-  public actionSheetCtrl = inject(ActionSheetController);
-  public entanglementService = inject(EntanglementService);
+  protected actionSheetController = inject(ActionSheetController);
+  
+  entanglementService = inject(EntanglementService);
 
   gridMode = signal<boolean>(true);
   constructor() {
@@ -51,7 +52,7 @@ export class HistoricSitePage implements OnInit {
   async toggleMapsMode(event: any) {
     this.gridMode.update((value) => value = event.detail.checked);
 
-    const actionSheet = await this.actionSheetCtrl.create({
+    const actionSheet = await this.actionSheetController.create({
       header: 'Aktifkan Maps Mode',
       mode: 'md',
       cssClass: 'action-sheet',
