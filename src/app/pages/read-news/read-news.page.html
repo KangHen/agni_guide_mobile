@@ -12,6 +12,7 @@
 
     <ion-card-content>
       <div [innerHTML]="news()?.content"></div>
+      <ion-text class="block font-sm bold mt-5">Author : {{ news()?.user?.name }}</ion-text>
     </ion-card-content>
   </ion-card>
   }

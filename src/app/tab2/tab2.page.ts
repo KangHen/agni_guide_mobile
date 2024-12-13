@@ -31,8 +31,11 @@ export class Tab2Page implements OnInit {
   newsService = inject(NewsService);
 
   page = signal<number>(1);
+  lastPage = signal<number>(1);
   items = signal<News[]>([]);
   isComplete = signal<boolean>(false);
+
+  limit: number = 10;
 
   constructor() {}
 
@@ -43,11 +46,12 @@ export class Tab2Page implements OnInit {
   async getNews(): Promise<void> {
     const loading = await this.helperService.presentLoading();
     try {
-      const { data } = await this.newsService.all();
+      const { data, meta } = await this.newsService.all({ page: this.page(), limit: this.limit });
       loading.dismiss();
       
       if (data.length > 0) {
         this.items.set(data);
+        this.lastPage.set(meta?.last_page ?? 1);
       }
     } catch (error: any) {
       loading.dismiss();
@@ -56,10 +60,19 @@ export class Tab2Page implements OnInit {
   }
 
  async onIonInfinite(ev: any): Promise<void> {
-    this.page.update(value => value=+1);
+    this.page.update(value => value + 1);
+
+    if (this.page() > this.lastPage()) {
+      this.isComplete.update(value => value = true);
+
+      setTimeout(() => {
+        (ev as InfiniteScrollCustomEvent).target.complete();
+      }, 500);
+      return;
+    }
 
     try {
-      const { data } = await this.newsService.all({ page: this.page() });
+      const { data } = await this.newsService.all({ page: this.page(), limit: this.limit });
       this.items.update(value => [...value, ...data]);
     } catch (error: any) {
       this.helperService.presentError(error?.message);

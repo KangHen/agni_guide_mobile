@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { IonContent, IonFab, IonFabButton, IonIcon, IonImg, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonChip } from '@ionic/angular/standalone';
+import { IonContent, IonFab, IonFabButton, IonIcon, IonImg, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonChip, IonText } from '@ionic/angular/standalone';
 import { News } from './news.type';
 import { ActivatedRoute } from '@angular/router';
 import { addIcons } from 'ionicons';
@@ -15,7 +15,7 @@ import { HelperService } from 'src/app/services/helper.service';
   templateUrl: './read-news.page.html',
   styleUrls: ['./read-news.page.scss'],
   standalone: true,
-  imports: [IonChip,
+  imports: [IonText, IonChip,
     IonImg, 
     IonContent,
     IonIcon,

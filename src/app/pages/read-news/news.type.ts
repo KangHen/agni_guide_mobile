@@ -28,4 +28,5 @@ export type NewsResponse = BasicResponse & {
 
 export type NewsParams = {
     page: number;
+    limit?: number;
 }

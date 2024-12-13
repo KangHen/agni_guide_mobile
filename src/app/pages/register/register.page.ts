@@ -85,7 +85,7 @@ export class RegisterPage implements OnInit {
     const loading = await this.helperService.presentLoading();
 
     try {
-      const { data, token } = await this.registerService.register(this.form.value);
+      const { data, token } = await this.registerService.store(this.form.value);
       loading.dismiss();
 
       await Preferences.set({ key: 'token', value: token });

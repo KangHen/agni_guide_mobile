@@ -11,7 +11,7 @@ export class RegisterService {
 
   constructor() { }
 
-  async register<T>(data: UserForm): Promise<any> {
+  async store<T>(data: UserForm): Promise<any> {
     const response = await CapacitorHttp.post({
       url: `${this.API}/register`,
       headers: {
