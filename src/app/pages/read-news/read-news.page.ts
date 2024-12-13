@@ -41,8 +41,6 @@ export class ReadNewsPage implements OnInit {
   news = signal<News|null>(null);
   image = signal<string>('');
 
-  isLoading = signal<boolean>(false);
-
   constructor() {
     addIcons({arrowBackOutline});
     this.slug.set(this.activatedRoute.snapshot.params['id'] ?? '');
@@ -57,13 +55,19 @@ export class ReadNewsPage implements OnInit {
   }
 
   async getNews(): Promise<void> {
-    this.isLoading.set(true);
-    const { data } = await this.newsServicwe.show(this.slug());
-    this.isLoading.set(false);
-    
-    if (data) {
-      this.news.set(data);
-      this.image.update(value => value = this.helperService.getImage(data.image as string));
+    const loading = await this.helperService.presentLoading();
+
+    try {
+      const { data } = await this.newsServicwe.show(this.slug());
+
+      loading.dismiss();    
+      if (data) {
+        this.news.set(data);
+        this.image.update(value => value = this.helperService.getImage(data.image as string));
+      }
+    } catch (error: any) {
+      loading.dismiss();
+      this.helperService.presentError(error?.message);
     }
   }
 
