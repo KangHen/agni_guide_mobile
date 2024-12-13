@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
-import { News, NewsParams, NewsResponse } from './news.type';
+import { GetNews, News, NewsParams, NewsResponse } from './news.type';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class NewsService {
     return this.httpService.get<NewsResponse>('posts', params);
   }
 
-  show(slug: string): Promise<NewsResponse> {
-    return this.httpService.get<NewsResponse>(`posts/${slug}`);
+  show(slug: string): Promise<GetNews> {
+    return this.httpService.get<GetNews>(`posts/${slug}`);
   }
 }

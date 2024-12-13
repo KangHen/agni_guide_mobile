@@ -26,6 +26,10 @@ export type NewsResponse = BasicResponse & {
     data: News|News[]
 }
 
+export type GetNews = BasicResponse & {
+    data: News;
+}
+
 export type NewsParams = {
     page: number;
     limit?: number;

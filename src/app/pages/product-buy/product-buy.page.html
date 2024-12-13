@@ -1,17 +1,14 @@
 <ion-content [fullscreen]="true">
-  <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+  <img alt="Image Product" [src]="images()[0]" />
 
-  <ion-card mode="ios">
-    <ion-card-header>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-      <ion-card-title>Card Title</ion-card-title>
+  <ion-card mode="ios" class="mt-0 py-0">
+    <ion-card-header class="mt-0 py-0">
+      <ion-card-title>{{ product()?.name }}</ion-card-title>
+      <h1 class="font-lg bold">{{ product()?.price | currency:'IDR':'symbol':'4.0-3' }}</h1>
     </ion-card-header>
 
     <ion-card-content>
-      <p>
-        Keep close to Nature's heart... and break clear away, once in awhile,
-        and climb a mountain or spend a week in the woods. Wash your spirit clean.
-      </p>
+      <p [innerHTML]="product()?.description"></p>
     </ion-card-content>
   </ion-card>
 
