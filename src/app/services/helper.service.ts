@@ -17,7 +17,11 @@ export class HelperService {
     const loading = await this.loadingController.create({
       mode: 'ios',
       message: 'Mohon tunggu...',
-      spinner: 'lines'
+      spinner: 'lines',
+      translucent: true,
+      htmlAttributes: {
+        'aria-hidden': false
+      }
     });
 
     await loading.present();

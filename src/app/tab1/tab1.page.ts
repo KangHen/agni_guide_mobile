@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, inject, OnInit, signal } from '@angular/core';
-import { IonContent, IonSearchbar, IonToggle, IonGrid, IonRow, IonCol, IonIcon, IonFab, IonFabButton, IonModal, IonToolbar, IonHeader, IonTitle, IonAvatar, IonLabel, IonItem, IonList, IonCheckbox } from '@ionic/angular/standalone';
+import { IonContent, IonSearchbar, IonToggle, IonGrid, IonRow, IonCol, IonIcon, IonFab, IonFabButton, IonModal, IonToolbar, IonHeader, IonTitle, IonAvatar, IonLabel, IonItem, IonList, IonCheckbox, IonButtons, IonButton } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { gridOutline, add } from 'ionicons/icons';
+import { gridOutline, add, closeOutline } from 'ionicons/icons';
 import mapboxgl from 'mapbox-gl';
 import { environment } from 'src/environments/environment.local';
 import { NavController, ActionSheetController } from '@ionic/angular';
@@ -20,7 +20,7 @@ import ClickableMarker from '../shared/clickable-marker';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
   standalone: true,
-  imports: [IonCheckbox, IonList, IonItem, IonLabel, IonAvatar, 
+  imports: [IonButton, IonButtons, IonCheckbox, IonList, IonItem, IonLabel, IonAvatar, 
     IonTitle,
     IonToolbar, 
     IonModal, 
@@ -54,8 +54,10 @@ export class Tab1Page implements OnInit, AfterViewInit {
   selectedCategories = signal<number[]>([]);
   markers = signal<mapboxgl.Marker[]>([]);
 
+  wasFilter = signal<boolean>(false);
+
   constructor() {
-    addIcons({gridOutline,add});
+    addIcons({gridOutline,closeOutline,add});
 
     mapboxgl.accessToken = environment.mapbox.accessToken;
   }
@@ -185,10 +187,17 @@ export class Tab1Page implements OnInit, AfterViewInit {
     }
   }
 
-  onWillDismiss(ev: any): Promise<void> {
+  onWillDismiss(ev: any): any {
     if (this.selectedCategories().length > 0) {
+      this.wasFilter.update(value => value = true);
       return this.getHistoricSite({ categories: this.selectedCategories().join(',') });
     } 
+
+    if (!this.selectedCategories().length && this.markers().length && !this.wasFilter()) {
+      return;
+    }
+
+    this.wasFilter.update(value => value = false);
 
     return this.getHistoricSite();
   }

@@ -5,17 +5,18 @@ export type HistoricSite = {
     id: number;
     name: string;
     description: string;
-    image: string;
+    images: string;
     location: string;
     latitude: number;
     longitude: number;
     slug: string;
+    vt?: string;
     user_id: number;
     created_at: string;
     updated_at: string;
 
-    User?: User;
-    Category?: Category;
+    user?: User;
+    category?: Category;
 }
 
 export type HistoricSiteParams = {

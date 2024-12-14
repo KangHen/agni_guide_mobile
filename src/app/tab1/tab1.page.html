@@ -13,7 +13,7 @@
     </ion-row>
     <ion-row>
       <ion-col size="12">
-        <ion-searchbar placeholder="Cari Situs" class="searchbar" mode="md"></ion-searchbar>
+        <ion-searchbar id="search-modal" placeholder="Cari Situs" class="searchbar" mode="md"></ion-searchbar>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -49,6 +49,23 @@
           </ion-item>
           }
         </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal #searchModal trigger="search-modal" mode="md" class="filled-modal">
+    <ng-template>
+      <ion-header class="ion-no-border">
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button [strong]="true" (click)="searchModal.dismiss()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-searchbar placeholder="Cari Situs" class="searchbar" mode="md" focus></ion-searchbar>
       </ion-content>
     </ng-template>
   </ion-modal>

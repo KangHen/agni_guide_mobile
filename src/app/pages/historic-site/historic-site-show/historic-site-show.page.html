@@ -1,22 +1,25 @@
 <ion-content [fullscreen]="true">
   <div class="position-relative">
-    <ion-button class="position-absolute top-0 right-0 mt-1 me-1 vt" mode="ios" size="small">
+    @if(historicSite()?.vt){
+    <ion-button class="position-absolute top-0 right-0 mt-1 me-1 vt" mode="ios" size="small"
+      (click)="openVirtualTour()">
       Virtual Tour
     </ion-button>
-    <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+    }
+
+    @for (item of images(); track $index) {
+    <img alt="Silhouette of mountains" [src]="item" />
+    }
   </div>
 
   <ion-card mode="ios">
     <ion-card-header>
-      <ion-card-title>Card Title</ion-card-title>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+      <ion-card-title>{{ historicSite()?.name }}</ion-card-title>
+      <ion-card-subtitle>{{ historicSite()?.category?.name }}</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-      <p>
-        Keep close to Nature's heart... and break clear away, once in awhile,
-        and climb a mountain or spend a week in the woods. Wash your spirit clean.
-      </p>
+      <p [innerHTML]="historicSite()?.description"></p>
     </ion-card-content>
   </ion-card>
 
@@ -26,3 +29,10 @@
     </ion-fab-button>
   </ion-fab>
 </ion-content>
+
+<ion-footer class="ion-no-border ion-padding">
+  <ion-button mode="ios" expand="block" (click)="navigate()">
+    <ion-icon slot="start" name="navigate-outline"></ion-icon>
+    Menuju Lokasi
+  </ion-button>
+</ion-footer>
