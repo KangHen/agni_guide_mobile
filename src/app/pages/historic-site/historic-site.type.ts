@@ -19,7 +19,7 @@ export type HistoricSite = {
 }
 
 export type HistoricSiteParams = {
-    page: number;
+    // page: number;
     search?: string;
     limit?: number;
     categories?: string;

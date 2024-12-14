@@ -78,16 +78,22 @@ export class Tab1Page implements OnInit, AfterViewInit {
 
     try {
       const { data } = await this.historicSiteService.all(params);
-
-      if (data.length > 0) {
-          this.loadMarkers(data);
+      
+      if (!data.length) {
+        this.helperService.presentError('Tidak di temukan data');  
       }
+
+      this.loadMarkers(data);
 
       loading.dismiss();
     } catch (error: any) {
       loading.dismiss();
       this.helperService.presentError(error?.message);
     }
+  }
+
+  async nearBe(): Promise<void> {
+    
   }
 
   async getCategories(): Promise<void> {
@@ -111,12 +117,13 @@ export class Tab1Page implements OnInit, AfterViewInit {
     });
   }
 
-  loadMarkers(data: HistoricSite[], reset: boolean = false): void {
+  loadMarkers(data: HistoricSite[]): void {
     if (!this.map) {
+      this.helperService.presentToast('Gagal menampilkan marker');
       return;  
     }
 
-    if (reset) {
+    if (this.markers().length && !data.length) {
       this.markers().forEach(marker => marker.remove());
       this.markers.set([]);
     }
@@ -178,9 +185,11 @@ export class Tab1Page implements OnInit, AfterViewInit {
     }
   }
 
-  onWillDismiss(ev: any) {
+  onWillDismiss(ev: any): Promise<void> {
     if (this.selectedCategories().length > 0) {
-      this.getHistoricSite({ page: 1, categories: this.selectedCategories().join(',') });
-    }
+      return this.getHistoricSite({ categories: this.selectedCategories().join(',') });
+    } 
+
+    return this.getHistoricSite();
   }
 }

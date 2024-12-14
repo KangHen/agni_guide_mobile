@@ -8,6 +8,10 @@ export const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.routes').then((m) => m.routes),
   },
   {
+    path: 'splash',
+    loadChildren: () => import('./pages/splash/splash.routes').then( m => m.routes)
+  },
+  {
     path: 'login',
     loadComponent: () => import('./pages/auth/login/login.page').then( m => m.LoginPage)
   },

@@ -25,7 +25,7 @@ export class HelperService {
     return loading;
   }
 
-  async presentToast(message: string, status?: string): Promise<void> {
+  async presentToast(message: string, status: string = 'success'): Promise<void> {
     const toast = await this.toastController.create({
       message,
       mode: 'ios',

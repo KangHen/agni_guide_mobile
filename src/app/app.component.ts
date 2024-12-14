@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Preferences } from '@capacitor/preferences';
+import { Platform, NavController } from '@ionic/angular';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 
 @Component({
@@ -8,5 +10,21 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
   imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent {
-  constructor() {}
+  protected platform = inject(Platform);
+  protected nav = inject(NavController);
+  constructor() {
+    this.platform.ready().then(() => {
+      this.isFirstLaunch().then((value) => {
+        if (value) {
+          this.nav.navigateRoot('/splash/first');
+        }
+      });
+    });
+  }
+
+  async isFirstLaunch(): Promise<boolean> {
+    const { value } = await Preferences.get({ key: 'isFirstLaunch' });
+
+    return value ? false : true;
+  }
 }

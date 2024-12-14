@@ -10,7 +10,7 @@ export class HistoricSiteService {
 
   constructor() { }
 
-  async all(params: HistoricSiteParams = { page: 1 }): Promise<HistoricSiteResponse> {
+  async all(params?: HistoricSiteParams): Promise<HistoricSiteResponse> {
     return this.httpService.get<HistoricSiteResponse>('historic-sites', params);
   }
 

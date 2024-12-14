@@ -69,12 +69,24 @@ ion-action-sheet.action-sheet {
     width: 100%;
 }
 
+.w-50 {
+    width: 50%;
+}
+
+.h-full {
+    height: 100%;
+}
+
 .top-0 {
     top: 0;
 }
 
 .left-0 {
     left: 0;
+}
+
+.right-0 {
+    right: 0;
 }
 
 .pl-2 {
@@ -121,6 +133,14 @@ ion-action-sheet.action-sheet {
     margin-right: 0.5rem;
 }
 
+.mx-auto {
+    margin: auto;
+}
+
+.mt-1 {
+    margin-top: 0.5rem;
+}
+
 .mt-3 {
     margin-top: 1.5rem;
 }
@@ -145,6 +165,10 @@ ion-action-sheet.action-sheet {
     margin-bottom: 1.5rem;
 }
 
+.me-1 {
+    margin-right: 0.5rem;
+}
+
 .font-md {
     font-size: 1rem !important;
 }
@@ -167,6 +191,33 @@ ion-action-sheet.action-sheet {
 
 .bold {
     font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.text-white {
+    color: #fff;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.splash {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 }
 
 ion-card{
