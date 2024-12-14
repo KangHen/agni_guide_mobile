@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { IonContent, IonRow, IonGrid, IonCol, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonCardSubtitle, IonFooter, IonButton, IonIcon, IonFab, IonFabButton } from '@ionic/angular/standalone';
+import { IonContent, IonRow, IonGrid, IonCol, IonCard, IonCardHeader, IonCardContent, IonCardTitle,  IonFooter, IonButton, IonIcon, IonFab, IonFabButton } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { logoWhatsapp, chevronForwardCircle, arrowBackOutline } from 'ionicons/icons';
 import { NavController } from '@ionic/angular';
@@ -19,7 +19,6 @@ import { ActivatedRoute } from '@angular/router';
     IonIcon, 
     IonButton, 
     IonCardTitle, 
-    IonCardSubtitle, 
     IonCardContent, 
     IonCardHeader, 
     IonCard, 
