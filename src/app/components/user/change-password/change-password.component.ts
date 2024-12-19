@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, output } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonInput, IonCol, IonButton, IonRow } from "@ionic/angular/standalone";
 
 @Component({
@@ -11,12 +12,25 @@ import { IonInput, IonCol, IonButton, IonRow } from "@ionic/angular/standalone";
     IonButton, 
     IonCol, 
     IonInput,
+    ReactiveFormsModule
   ]
 })
 export class ChangePasswordComponent  implements OnInit {
+  clicked = output<any>();
+
+  form!: FormGroup;
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.form = new FormGroup({
+      old_password: new FormControl('', [Validators.required]),
+      new_password: new FormControl('', [Validators.required]),
+      confirm_password: new FormControl('', [Validators.required]),
+    });
+  }
 
+  onSubmit() {
+    this.clicked.emit(this.form.value);
+  }
 }

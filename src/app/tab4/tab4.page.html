@@ -65,9 +65,18 @@
         </ion-button>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button mode="ios" expand="block" color="danger">
+          <ion-icon slot="start" name="trash-outline"></ion-icon>
+          Hapus Akun Saya
+        </ion-button>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 
-  <ion-modal mode="md" trigger="change-password-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+  <ion-modal #changePasswordModal mode="md" trigger="change-password-modal" [initialBreakpoint]="1"
+    [breakpoints]="[0, 1]">
     <ng-template>
       <ion-header class="ion-no-border">
         <ion-toolbar>
@@ -75,12 +84,12 @@
         </ion-toolbar>
       </ion-header>
       <div class="change-password-content">
-        <app-change-password></app-change-password>
+        <app-change-password (clicked)="onUpdatePassword($event)"></app-change-password>
       </div>
     </ng-template>
   </ion-modal>
 
-  <ion-modal mode="md" trigger="change-user-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
+  <ion-modal #changeUserModal mode="md" trigger="change-user-modal" [initialBreakpoint]="1" [breakpoints]="[0, 1]">
     <ng-template>
       <ion-header class="ion-no-border">
         <ion-toolbar>
@@ -88,7 +97,7 @@
         </ion-toolbar>
       </ion-header>
       <div class="change-user-content">
-        <app-change-user-profile [user]="user()" (clicked)="onSubmit($event)"></app-change-user-profile>
+        <app-change-user-profile [user]="user()" (clicked)="onUpdateProfile($event)"></app-change-user-profile>
       </div>
     </ng-template>
   </ion-modal>

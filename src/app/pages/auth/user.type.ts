@@ -30,3 +30,9 @@ export type UserForm = {
     confirm_password: string;
     terms: boolean;
 }
+
+export type PasswordForm = {
+    old_password: string;
+    new_password: string;
+    confirm_password: string;
+}
