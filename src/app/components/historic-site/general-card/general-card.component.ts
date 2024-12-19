@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, input, OnInit, output, signal } from '@angular/core';
 import { IonCard, IonCardTitle, IonCardSubtitle, IonCardContent, IonGrid, IonRow, IonCol } from '@ionic/angular/standalone';
+import { HistoricSite } from 'src/app/pages/historic-site/historic-site.type';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
   selector: 'app-general-card',
@@ -17,9 +19,23 @@ import { IonCard, IonCardTitle, IonCardSubtitle, IonCardContent, IonGrid, IonRow
   ]
 })
 export class GeneralCardComponent  implements OnInit {
+  item = input<HistoricSite>();
+  clicked = output<number>();
 
+  helperService = inject(HelperService);
+
+  image = signal<string>('https://ionicframework.com/docs/img/demos/card-media.png');
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.item()?.images) {
+      const images = JSON.parse(this.item()?.images || '[]');
+      const parseImages: string[] = images.map((image: string) => this.helperService.getImage(`${image}`));
+      this.image.set(parseImages[0]);
+    }
+  }
 
+  detail(): void {
+    this.clicked.emit(this.item()?.id as number);
+  }
 }

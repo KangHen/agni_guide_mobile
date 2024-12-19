@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, OnInit, signal } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { IonContent, IonSearchbar, IonToggle, IonGrid, IonRow, IonCol, IonIcon, IonFab, IonFabButton, IonModal, IonToolbar, IonHeader, IonTitle, IonAvatar, IonLabel, IonItem, IonList, IonCheckbox, IonButtons, IonButton } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { gridOutline, add, closeOutline } from 'ionicons/icons';
@@ -37,6 +37,8 @@ import ClickableMarker from '../shared/clickable-marker';
   ],
 })
 export class Tab1Page implements OnInit, AfterViewInit {
+  @ViewChild('searchModal') searchModal!: IonModal;
+
   protected nav = inject(NavController);
   protected actionSheetController = inject(ActionSheetController);
   
@@ -46,6 +48,7 @@ export class Tab1Page implements OnInit, AfterViewInit {
   historicSiteService = inject(HistoricSiteService);
 
   map: null|mapboxgl.Map = null;
+  sites = signal<HistoricSite[]>([]);
   categories = signal<Category[]>([]);
   mapLng = signal<number>(environment.mapbox.defaultLng)
   mapLat = signal<number>(environment.mapbox.defaultLat)
@@ -92,6 +95,22 @@ export class Tab1Page implements OnInit, AfterViewInit {
       loading.dismiss();
       this.helperService.presentError(error?.message);
     }
+  }
+
+  async searchHistoricSite(ev: any) {
+    if (ev.target.value) {
+      const { data } = await this.historicSiteService.all({
+        search: ev.target.value
+      });
+
+      this.sites.update(value => value = data);
+    }
+  }
+
+  selectSite(site: HistoricSite): void {
+    this.sites.set([]);
+    this.searchModal.dismiss();
+    this.nav.navigateForward(`/historic-site/show/${site.id}`);
   }
 
   async nearBe(): Promise<void> {

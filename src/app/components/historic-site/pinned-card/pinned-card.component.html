@@ -1,9 +1,10 @@
-<ion-card mode="ios" class="py-0 my-0">
+<ion-card mode="ios" class="py-0 my-0" (click)="detail()">
   <ion-card-content class="position-relative ion-no-padding ion-no-magin">
-    <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+    <img [alt]="item()?.name" [src]="image()" loading="lazy" />
+
     <div class="overlay">
       <ion-card-title>
-        Goa Suci
+        {{ item()?.name }}
       </ion-card-title>
     </div>
   </ion-card-content>

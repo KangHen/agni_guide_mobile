@@ -26,6 +26,15 @@ export type HistoricSiteParams = {
     categories?: string;
 }
 
+export type ShowcaseParams = {
+    limit?: number;
+    pinned?: number;
+    populer?: number;
+    explore?: number;
+    exclude?: string;
+}
+
+
 export type HistoricSiteResponse = {
     data: HistoricSite[];
 }

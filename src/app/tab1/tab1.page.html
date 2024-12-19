@@ -57,6 +57,7 @@
     <ng-template>
       <ion-header class="ion-no-border">
         <ion-toolbar>
+          <ion-title>Cari Situs</ion-title>
           <ion-buttons slot="end">
             <ion-button [strong]="true" (click)="searchModal.dismiss()">
               <ion-icon name="close-outline"></ion-icon>
@@ -64,8 +65,23 @@
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-      <ion-content class="ion-padding">
-        <ion-searchbar placeholder="Cari Situs" class="searchbar" mode="md" focus></ion-searchbar>
+      <ion-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <ion-searchbar placeholder="Cari Situs" class="searchbar" mode="md"
+                (ionInput)="searchHistoricSite($event)" [debounce]="400"></ion-searchbar>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <ion-list lines="full">
+          @for (site of sites(); track $index) {
+          <ion-item button (click)="selectSite(site)">
+            <ion-label>{{ site.name }}</ion-label>
+          </ion-item>
+          }
+        </ion-list>
       </ion-content>
     </ng-template>
   </ion-modal>

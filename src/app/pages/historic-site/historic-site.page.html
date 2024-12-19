@@ -2,7 +2,9 @@
   <ion-grid class="ion-no-padding">
     <ion-row>
       <ion-col size="12" class="flex ion-justify-content-between">
+        @if (pinneds().length){
         <ion-title class="mt-3 mb-1">Tersematkan</ion-title>
+        }
         <div class="grid-mode">
           <ion-icon name="grid-outline" color="medium" class="grid"></ion-icon>
           <ion-toggle [enableOnOffLabels]="true" [checked]="gridMode()" mode="ios"
@@ -10,26 +12,48 @@
         </div>
       </ion-col>
     </ion-row>
+    @if (pinneds().length){
     <ion-row>
-      <ion-col size="10">
-        <app-pinned-card></app-pinned-card>
+      <ion-col size="12">
+        <swiper-container [modules]="swiperModules" [slidesPerView]="1.25" [loop]="true">
+          @for (pinned of pinneds(); track $index) {
+          <swiper-slide>
+            <app-pinned-card [item]="pinned" (clicked)="detail($event)"></app-pinned-card>
+          </swiper-slide>
+          }
+        </swiper-container>
       </ion-col>
     </ion-row>
+    }
+
+    @if (populers().length){
     <ion-row>
       <ion-col size="12">
         <ion-title class="mt-3 mb-1">Populer</ion-title>
       </ion-col>
-      <ion-col size="6">
-        <app-popular-card></app-popular-card>
+      <ion-col size="12">
+        <swiper-container [modules]="swiperModules" [slidesPerView]="2.25" [loop]="true">
+          @for (populer of populers(); track $index) {
+          <swiper-slide>
+            <app-popular-card [item]="populer" (clicked)="detail($event)"></app-popular-card>
+          </swiper-slide>
+          }
+        </swiper-container>
       </ion-col>
     </ion-row>
+    }
+
+    @if (generals().length){
     <ion-row>
       <ion-col size="12">
         <ion-title class="mt-3 mb-1">Jelajahi</ion-title>
       </ion-col>
+      @for (general of generals(); track $index) {
       <ion-col size="12">
-        <app-general-card></app-general-card>
+        <app-general-card [item]="general" (clicked)="detail($event)"></app-general-card>
       </ion-col>
+      }
     </ion-row>
+    }
   </ion-grid>
 </ion-content>

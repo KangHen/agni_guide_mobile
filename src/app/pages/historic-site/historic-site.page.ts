@@ -10,12 +10,18 @@ import { timer } from 'rxjs';
 import { NavController, ActionSheetController } from '@ionic/angular';
 import { Preferences } from '@capacitor/preferences';
 import { EntanglementService } from 'src/app/services/entanglement.service';
+import { HistoricSiteService } from './historic-site.service';
+import { HelperService } from 'src/app/services/helper.service';
+import { HistoricSite } from './historic-site.type';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { IonicSlides } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-historic-site',
   templateUrl: './historic-site.page.html',
   styleUrls: ['./historic-site.page.scss'],
   standalone: true,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     IonCol, 
     IonRow, 
@@ -34,19 +40,51 @@ export class HistoricSitePage implements OnInit {
   protected nav = inject(NavController);
   protected actionSheetController = inject(ActionSheetController);
   
+  helperService = inject(HelperService);
+  historicSiteService = inject(HistoricSiteService);
   entanglementService = inject(EntanglementService);
 
   gridMode = signal<boolean>(true);
+  pinneds = signal<HistoricSite[]>([]);
+  populers = signal<HistoricSite[]>([]);
+  generals = signal<HistoricSite[]>([]);
+  
+  swiperModules = [IonicSlides];
+
   constructor() {
     addIcons({gridOutline});
   }
 
   ngOnInit() {
-    
+    this.getShowcase();
   }
 
   ionViewDidEnter() {
     this.gridMode.set(true);
+  }
+
+  async getShowcase(): Promise<void> {
+    const loading = await this.helperService.presentLoading();
+
+    try {
+      const getPinned = await this.historicSiteService.showcase({ pinned: 1, limit: 5 });
+      const getPopuler = await this.historicSiteService.showcase({ populer: 1, limit: 7 });
+
+      this.pinneds.set(getPinned.data ?? []);
+      this.populers.set(getPopuler.data ?? []);
+
+      if (this.populers().length) {
+        const excludes = this.populers().map((populer: HistoricSite) => populer.id);
+
+        const getGenerals = await this.historicSiteService.showcase({ explore: 1, exclude: excludes.join(','), limit: 15 });
+        this.generals.set(getGenerals.data ?? []);
+      }
+
+      loading.dismiss();
+    } catch (error: any) {
+      loading.dismiss();
+      this.helperService.presentError(error?.message);
+    }
   }
 
   async toggleMapsMode(event: any) {
@@ -75,6 +113,11 @@ export class HistoricSitePage implements OnInit {
         }
       ]
     });
+
     await actionSheet.present();
+  }
+
+  detail(event: number): void {
+    this.nav.navigateForward(`/historic-site/show/${event}`);
   }
 }
