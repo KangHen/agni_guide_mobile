@@ -220,6 +220,10 @@ ion-action-sheet.action-sheet {
     }
 }
 
+.must-on-top {
+    z-index: 9999;
+}
+
 ion-card{
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
 

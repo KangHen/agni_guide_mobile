@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonCardSubtitle, IonFab, IonFabButton, IonIcon, IonButton, IonFooter } from '@ionic/angular/standalone';
@@ -11,17 +11,21 @@ import { ActivatedRoute } from '@angular/router';
 import { HelperService } from 'src/app/services/helper.service';
 import { Browser } from '@capacitor/browser';
 import { Geolocation } from '@capacitor/geolocation';
+import { IonicSlides } from '@ionic/core';
 
 @Component({
   selector: 'app-historic-site-show',
   templateUrl: './historic-site-show.page.html',
   styleUrls: ['./historic-site-show.page.scss'],
   standalone: true,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [IonFooter, IonButton, IonIcon, IonFabButton, IonFab, IonCardSubtitle, IonCardTitle, IonCardContent, IonCardHeader, IonCard,  IonContent, CommonModule, FormsModule]
 })
 export class HistoricSiteShowPage implements OnInit {
   protected nav = inject(NavController);
   protected activatedRoute = inject(ActivatedRoute);
+
+  swiperModules = [IonicSlides];
 
   helperService = inject(HelperService);
   historicSiteService = inject(HistoricSiteService);

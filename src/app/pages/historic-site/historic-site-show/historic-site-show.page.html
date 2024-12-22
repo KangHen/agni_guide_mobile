@@ -1,15 +1,19 @@
 <ion-content [fullscreen]="true">
   <div class="position-relative">
     @if(historicSite()?.vt){
-    <ion-button class="position-absolute top-0 right-0 mt-1 me-1 vt" mode="ios" size="small"
+    <ion-button class="position-absolute top-0 right-0 mt-1 me-1 vt must-on-top" mode="ios" size="small"
       (click)="openVirtualTour()">
       Virtual Tour
     </ion-button>
     }
 
-    @for (item of images(); track $index) {
-    <img alt="Silhouette of mountains" [src]="item" />
-    }
+    <swiper-container [modules]="swiperModules" [loop]="true">
+      @for (item of images(); track $index) {
+      <swiper-slide>
+        <img alt="Silhouette of mountains" [src]="item" />
+      </swiper-slide>
+      }
+    </swiper-container>
   </div>
 
   <ion-card mode="ios">
