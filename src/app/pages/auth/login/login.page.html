@@ -11,13 +11,13 @@
           <h1>Login</h1>
         </ion-col>
         <ion-col size="12">
-          <ion-input type="email" formControlName="email" fill="outline" labelPlacement="stacked" label="Email"
-            placeholder="email@domain.com">
+          <ion-input mode="md" type="email" formControlName="email" fill="outline" labelPlacement="stacked"
+            label="Email" placeholder="email@domain.com">
             <ion-icon slot="start" name="mail" aria-hidden="true"></ion-icon>
           </ion-input>
         </ion-col>
         <ion-col size="12">
-          <ion-input [type]="showPassword() ? 'text' : 'password'" fill="outline" formControlName="password"
+          <ion-input mode="md" [type]="showPassword() ? 'text' : 'password'" fill="outline" formControlName="password"
             labelPlacement="stacked" label="Password" placeholder="password">
             <ion-icon slot="start" name="lock-closed" aria-hidden="true"></ion-icon>
             <ion-button (click)="togglePassword()" fill="clear" slot="end" aria-label="Show/hide">

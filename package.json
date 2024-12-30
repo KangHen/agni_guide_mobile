@@ -30,6 +30,7 @@
     "@capacitor/keyboard": "6.0.3",
     "@capacitor/preferences": "^6.0.3",
     "@capacitor/status-bar": "^6.0.2",
+    "@capacitor/toast": "^6.0.3",
     "@ionic/angular": "^8.0.0",
     "ionicons": "^7.2.1",
     "mapbox-gl": "^3.8.0",

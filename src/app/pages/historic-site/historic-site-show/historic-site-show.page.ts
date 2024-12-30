@@ -51,7 +51,10 @@ export class HistoricSiteShowPage implements OnInit {
   }
 
   async getMyLocation() {
-    const location = await Geolocation.getCurrentPosition();
+    const location = await Geolocation.getCurrentPosition({
+      enableHighAccuracy: true,
+      maximumAge: 3000
+    });
     this.startLatitude.set(location.coords.latitude);
     this.startLongitude.set(location.coords.longitude);
   }

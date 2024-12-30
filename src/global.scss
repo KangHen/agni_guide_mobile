@@ -224,6 +224,13 @@ ion-action-sheet.action-sheet {
     z-index: 9999;
 }
 
+.md .toasts-bottom {
+    transform: translateY(-56px) !important;
+}
+.ios .toasts-bottom {
+    transform: translateY(-50px) !important;
+}
+
 ion-card{
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
 

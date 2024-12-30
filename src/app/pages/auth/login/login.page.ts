@@ -4,7 +4,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { IonContent, IonCol, IonButton, IonInput, IonGrid, IonRow, IonIcon, IonCheckbox, IonTitle, IonToolbar, IonModal, IonButtons, IonHeader } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { closeOutline, eye, lockClosed, mail } from 'ionicons/icons';
-import { NavController} from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { AuthService } from '../auth.service';
 import { HelperService } from 'src/app/services/helper.service';
 import { Preferences } from '@capacitor/preferences';
@@ -60,14 +60,13 @@ export class LoginPage implements OnInit {
   }
 
   async login(): Promise<void> {
-    const loading = await this.helperService.presentLoading();
     const terms = this.form.value.terms;
 
     if (!terms) {
-      loading.dismiss();
-      
-      return this.helperService.presentToast('Anda harus setuju dengan syarat dan ketentuan');
+      return this.helperService.presentError('Anda harus setuju dengan syarat dan ketentuan');
     }
+
+    const loading = await this.helperService.presentLoading();
 
     try {
       const { data, token } = await this.authService.login(this.form.value);

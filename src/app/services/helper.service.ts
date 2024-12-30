@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { environment } from 'src/environments/environment.local';
+import { Toast } from '@capacitor/toast';
 
 @Injectable({
   providedIn: 'root'
@@ -15,16 +16,13 @@ export class HelperService {
 
   async presentLoading(): Promise<HTMLIonLoadingElement> {
     const loading = await this.loadingController.create({
-      mode: 'ios',
       message: 'Mohon tunggu...',
       spinner: 'lines',
-      translucent: true,
-      htmlAttributes: {
-        'aria-hidden': false
-      }
+      mode: 'ios',
+      translucent: true
     });
 
-    await loading.present();
+    loading.present();
 
     return loading;
   }
@@ -34,7 +32,8 @@ export class HelperService {
       message,
       mode: 'ios',
       duration: 2000,
-      color: status === 'success' ? 'success' : 'danger'
+      color: status === 'success' ? 'success' : 'danger',
+      cssClass: 'toasts-bottom'
     });
 
     return toast.present();
@@ -43,7 +42,6 @@ export class HelperService {
   async presentError(message: string): Promise<void> {
     const toast = await this.toastController.create({
       message,
-      mode: 'ios',
       duration: 2000,
       color: 'danger'
     });
